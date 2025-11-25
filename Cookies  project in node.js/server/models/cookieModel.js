@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const cookieSchema = new mongoose.Schema({
     username:String,
-    Password:String,
+    password:String,
 });
 
-module.exports=new mongoose.model("cookie",cookieSchema);
+module.exports= mongoose.model("cookie",cookieSchema);

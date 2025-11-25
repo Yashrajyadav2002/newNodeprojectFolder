@@ -1,5 +1,4 @@
 const cookieModel = require("../models/cookieModel");
-const CookieModel = require("../models/cookieModel");
 
 const bcrypt = require("bcrypt");
 
@@ -9,18 +8,21 @@ const cookieRegistration = async(req,res)=>{
     const {username,password}=req.body;
     const hashedPassword = await bcrypt.hash(password,10);
 
-    await username.create({username,password:hashedPassword});
+    await cookieModel.create({username,password:hashedPassword});
     res.send({message:"User Registered SuccesFully"});
 };
 
+// login route
+
 const cookieLogin = async(req,res)=>{
     const {username,password}=req.body;
+    console.log(req.body);
     const user = await cookieModel.findOne({username});
 
     if(!user){
         res.status(400).send({msg:"User not Found"});
     };
-    const isMatch = await bcrypt.compare(password,user.password);
+    const isMatch = bcrypt.compare(password,user.password);
     if(!isMatch){
         res.status(400).send({msg:"Invalid Creanditals"});
     };
@@ -53,4 +55,11 @@ const cookieProfile = async(req,res)=>{
 const cookieLogout = async(req,res)=>{
     res.clearCookie("cookieToken");
     res.send({msg:"logged out Succesfully"});
+};
+
+module.exports = {
+    cookieRegistration,
+    cookieLogin,
+    cookieProfile,
+    cookieLogout,
 }
