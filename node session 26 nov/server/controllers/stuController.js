@@ -4,16 +4,15 @@ class StuController{
         console.log(req.session.id);
         console.log(req.session.cookie);
         console.log(req.session.cookie.maxAge);
-        console.log(req.session.cookie.sessionmaxAge);
+        console.log(req.session.cookie.originalMaxAge);
         console.log(req.sessionID);
-
         res.send("session info....")
     }
 
 
     static delete_session=(req,res)=>{
         req.session.destroy(()=>{
-            console.log(`session Deleted ... canot ccess${req.sessionID}`);
+            console.log(`session Deleted ... canot access!!`);
         });
         res.send("session Deleatd !!")
     }
