@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <script>
+
+        // hide fro everone
+        // $(document).ready(function(){
+        //     $("button").click(function(){
+        //        $("h1").hide(3000);
+        //     })
+        // });
+
+
+        // hide when we click on the line ids hide
+        //  $(document).ready(function(){
+        //     $("p").click(function(){
+        //        $(this).hide(3000);
+        //     });
+
+// click to hode personal button 
+    //         $(document).ready(function(){
+    //         $("#btn1").click(function(){
+    //            $("#demo1").hide(3000);
+    //         })
+
+    //         $(document).ready(function(){
+    //         $("#btn2").click(function(){
+    //            $("#demo2").hide(3000);
+    //         })
+    //     });
+    // });
+
+
+    // for click blur operation
+      $(document).ready(function(){
+            $("input").focus(function(){
+               $(this).css("background-colour","green");
+            })
+            $("input").blur(function(){
+                $(this).css("background-colour","white")
+            })
+        });
+               
+      
+    </script>
+</head>
+<body bgcolor="lightblue">
+    <!-- <h1> Welcome to my website</h1> -->
+
+    <!-- <div id="demo1">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat, quis distinctio voluptatibus quasi nobis ipsam molestiae voluptate deleniti asperiores neque voluptas cum amet, rerum eveniet exercitationem sequi minima sed nam? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores voluptate quas architecto amet vel? Aut iste culpa perspiciatis, necessitatibus animi consectetur dolorem sapiente, ad quidem alias deleniti voluptatibus quisquam illum?</div>
+
+    <div id="demo2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores nihil nemo illo, ipsam sit, tenetur, mollitia expedita commodi dolorem excepturi inventore rem fugit ad modi perspiciatis tempore minus quae nisi? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ratione obcaecati doloribus fuga rerum voluptatibus possimus laborum sapiente sequi commodi minus vel explicabo accusamus quisquam, illum voluptate amet ea porro!</div> -->
+
+    <!-- <p>hello friends </p>
+    <p>this is ny web</p>
+    <p>what is your work friends</p> -->
+
+    enter rollno : <input type="text">
+    <br>
+    Enter name : <input type="text">
+    <br>
+    Enter city : <input type="text">
+    <br>
+    Enter salary : <input type="text">
+
+    <!-- <button id="btn1">Click me</button> -->
+    <button id="btn2">Click me</button>
+</body>
+</html>
