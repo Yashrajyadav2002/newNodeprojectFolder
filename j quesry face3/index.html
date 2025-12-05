@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+     <script>
+        $(document).ready(function(){
+          $("#btn").click(function(){
+            $("#box").slideUp();
+            $("#box1").slideUp();
+            $("#box2").slideUp();
+            $("#box3").slideUp();
+             });
+
+             $("#btn2").click(function(){
+            $("#box").slideToggle(5000);
+            $("#box1").slideDown(5000);
+            $("#box2").slideToggle(5000);
+            $("#box3").slideDown(5000);
+             });
+        });
+     </script>
+</head>
+<body>
+
+    <input type="text" id="name" placeholder="Type something">
+     <button id="btn">Close</button>
+     <button id="btn2">Open</button>
+     <div id="box" style="width:100px;height:100px;background:rgb(197, 15, 15);margin-top:10px"></div>
+     <div id="box1" style="width:100px;height:100px;background:rgb(146, 174, 21);margin-top:10px"></div>
+     <div id="box2" style="width:100px;height:100px;background:rgb(59, 23, 202);margin-top:10px"></div>
+     <div id="box3" style="width:100px;height:100px;background:rgb(196, 196, 17);margin-top:10px"></div>
+
+
+    
+
+    
+</body>
+</html>
