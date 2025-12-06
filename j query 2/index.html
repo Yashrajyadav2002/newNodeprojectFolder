@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script src="jquery.js"></script>
+    <script>
+        // $(document).ready(function(){
+        //     $("#btn1").click(function(){
+        //         $("#box".hide("slow"));
+        //     })
+
+        //      $("#btn2").click(function(){
+        //         $("#box".show("slow"));
+        //     })
+        // // })
+
+        //  $(document).ready(function(){
+        //     $("#btn1").click(function(){
+        //         $("#box").fadeToggle(5000);
+
+        //      })
+        //     });
+
+        
+
+        //  $(document).ready(function(){
+        //     $("button").click(function(){
+        //         $("img").animate({
+        //             left:'250px',
+        //             opacity:'0.5',
+        //             height:'+=150px',
+        //             width:'+=150px'
+        //         });
+
+        //      })
+        //     });
+
+
+        
+
+        //  $(document).ready(function(){
+        //     $("button").click(function(){
+        //         var div = $("div");
+        //         div.animate({height:'400px',opacity:'0.4'},"slow");
+        //         div.animate({width:'400px',opacity:'0.4'},"slow");
+        //         div.animate({height:'200px',opacity:'0.4'},"slow");
+        //         div.animate({width:'200px',opacity:'0.4'},"slow");
+
+        //      })
+        //     });
+
+        
+
+         $(document).ready(function(){
+            $("button").click(function(){
+               
+              $("#d1").delay(10).fadeIn();
+              $("#d2").delay(20).fadeIn();
+              $("#d3").delay(30).fadeIn();
+              $("#d4").delay(40).fadeIn();
+              $("#d5").delay(50).fadeIn();
+
+               var div = $("#main");
+                div.animate({height:'400px',opacity:'10'},"1000");
+                div.animate({width:'400px',opacity:'20'},"2000");
+                div.animate({height:'200px',opacity:'30'},"3000");
+                div.animate({width:'200px',opacity:'40'},"4000");
+            });
+        });
+
+    </script>
+</head>
+<body >
+    <h1>Welcome to my web</h1>
+
+    <button>Start animation</button>
+    <!-- <button id="btn2">Hide</button> -->
+    <!-- <div id="box" style="background-color: lightcoral; width:300px; height: 200px; display: none;" > -->
+   <!-- <img src="car img.jpg" style="width: 300px; height: 200px;"> -->
+    <!-- </div> -->
+<!-- 
+    <p> by defual all html have a stati posiotion and ant be move to mainuplte the position remamber
+        to first set the css posiotion property of the element relative fixed
+    </p>
+    <div  style="background-color: green; height: 300px; width: 400px; position:absolute;">
+        <img src="car img.jpg" >
+    </div> -->
+
+    <!-- <div style="background-color: aqua; height: 800px; width: 700px;">
+
+    </div> -->
+
+    <br> <br>
+    <div id="main">
+    <div id="d1" style="width: 100px; height: 100px; display: none; background-color: aquamarine;"></div>
+    <div id="d2" style="width: 100px; height: 100px; display: none; background-color: rgb(154, 11, 116);"></div>
+    <div id="d3" style="width: 100px; height: 100px; display: none; background-color: rgb(55, 22, 134);"></div>
+    <div id="d4" style="width: 100px; height: 100px; display: none; background-color: rgb(216, 183, 17);"></div>
+    <div id="d5" style="width: 100px; height: 100px; display: none; background-color: rgb(112, 176, 15);"></div>
+    </div>
+    
+</body>
+</html>
