@@ -1,0 +1,2 @@
+this is my sample file for zlib file system ;
+tis is the first file of the app and index page now i am coprthis file for another file ;
