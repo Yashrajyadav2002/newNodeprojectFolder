@@ -1,8 +1,8 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./Layout";
-import Home from "./pages/Home";
-import AdminLogin from "./admin/AdminLogin";
-import AdminDashBoard from "./admin/AdminDashBoard";
+import Home from "../pages/Home";
+// import AdminLogin from "./admin/AdminLogin";
+// import AdminDashBoard from "./admin/AdminDashBoard";
 import AddProduct from "./admin/Addproduct";
 
 
