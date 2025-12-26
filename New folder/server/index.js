@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const AdminRoute = require("./routes/adminRoute");
+const ProductRoute = require("./routes/productRoute");
 mongoose.connect(process.env.DBCONN).then(()=>{
     console.log("Database Succesfully Connected!");
 })
@@ -15,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/admin", AdminRoute);
-
+app.use("/product", ProductRoute);
 
 
 
