@@ -1,38 +1,53 @@
 const ProductModel = require("../models/productModel");
 const UserModel = require("../models/userModel");
+
 const brandDisplay = async (req, res) => {
-    const product = await ProductModel.find();
-    res.send(product);
+    try {
+        const product = await ProductModel.find();
+        res.send(product);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ msg: "Server error" });
+    }
 }
 
 const userRegistration = async (req, res) => {
-    const { name, email, password, contact, city, shippingadd, pincode } = req.body;
-    const product = await UserModel.create({
-        name: name,
-        email: email,
-        password: password,
-        contact: contact,
-        city: city,
-        shippingadd: shippingadd,
-        pincode: pincode
-    })
-    res.send("User Created!!!");
+    try {
+        const { name, email, password, contact, city, shippingadd, pincode } = req.body;
+        await UserModel.create({
+            name,
+            email,
+            password,
+            contact,
+            city,
+            shippingadd,
+            pincode
+        });
+        res.send("User Created!!!");
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ msg: "Server error" });
+    }
 }
 
-const userLogin =async(req, res)=>{
-    const { email , password} = req.body;
-    const user = await UserModel.findOne({email:email});
+const userLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await UserModel.findOne({ email });
 
-      if (!user){
-         res.status(401).send({msg:"Invalid Email Id!"});
-      }
+        if (!user) {
+            return res.status(401).send({ msg: "Invalid Email Id!" });
+        }
 
-      if (user.password!=password)
-      {
-          res.status(401).send({msg:"Invalid Password!"});
-      }
-      
-      res.status(200).send({user:user, msg:"You are Succesfully Login!!!"});
+        if (user.password != password) {
+            return res.status(401).send({ msg: "Invalid Password!" });
+        }
+
+        res.status(200).send({ user: user, msg: "You are Successfully Login!!!" });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ msg: "Server error" });
+    }
 }
 
 module.exports = {

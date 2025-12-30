@@ -4,24 +4,28 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const cors = require("cors");
+
 const AdminRoute = require("./routes/adminRoute");
 const ProductRoute = require("./routes/productRoute");
-mongoose.connect(process.env.DBCONN).then(()=>{
-    console.log("Database Succesfully Connected!");
-})
 
-// Use body-parser middleware for JSON and URL-encoded data
+// Connect to MongoDB
+mongoose.connect(process.env.DBCONN)
+    .then(() => console.log("Database successfully connected!"))
+    .catch((err) => console.log("Database connection error:", err));
+
+// Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
+// Serve uploaded images
+app.use("/uploads", express.static("uploads"));
+
+// Routes
 app.use("/admin", AdminRoute);
 app.use("/product", ProductRoute);
 
-
-
-
-
-app.listen(3500, ()=>{
-    console.log("server run on 8000 Port!")
-})
+// Start server
+app.listen(3500, () => {
+    console.log("Server running on port 3500!");
+});
