@@ -1,10 +1,16 @@
-
 const express = require("express");
-const route = express.Router();
-const AdminController = require("../controllers/adminController");
-route.post("/login", AdminController.adminLogin);
-route.post("/addproduct", AdminController.addProduct);
+const router = express.Router();
+const { adminLogin, addProduct } = require("../controllers/adminController");
+const upload = require("../middleware/multer");
+const adminAuth = require("../middleware/adminAuth");
 
+router.post("/login", adminLogin);
 
+router.post(
+    "/addproduct",
+    adminAuth,
+    upload.array("images", 5),
+    addProduct
+);
 
-module.exports= route;
+module.exports = router;
