@@ -1,0 +1,18 @@
+.footer {
+  background: #020617;
+  color: #e5e7eb;
+  margin-top: 80px;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Top Section */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 50px 80px;
+  border-bottom: 2px solid #facc15;
+}
+
+.footer-brand h2 {
+  color: #113887;
