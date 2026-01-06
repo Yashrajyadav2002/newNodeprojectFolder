@@ -1,0 +1,154 @@
+/* ================= LAYOUT ================= */
+.login-container {
+  display: flex;
+  height: 90vh;
+  margin-top: 20px;
+  font-family: "Roboto", sans-serif;
+  background: #1a1a1a;
+  overflow: hidden;
+  color: #fff;
+}
+
+.login-left {
+  width: 55%;
+  position: relative;
+  background: linear-gradient(120deg, #2b2b2b, #3d3d3d);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  padding: 40px 20px;
+}
+
+.login-left h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ff8c00;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.login-left p {
+  max-width: 400px;
+  font-size: 16px;
+  color: #cccccc;
+  margin-bottom: 40px;
+}
+
+/* ================= TOOL ICONS ================= */
+.tool-icon {
+  position: absolute;
+  font-size: 36px;
+  color: #ff8c00;
+  opacity: 0.6;
+  transition: all 0.4s ease;
+  animation: floatTool 6s ease-in-out infinite;
+}
+
+/* Hover effects: spin + metallic shine */
+.tool-icon:hover {
+  transform: translateY(-5px) scale(1.2) rotate(20deg);
+  opacity: 1;
+  text-shadow: 0 0 10px #ff8c00, 0 0 20px #ffa500;
+  filter: drop-shadow(0 0 8px #ffa500);
+}
+
+/* Individual tool positions */
+.tool1 { top: 10%; left: 12%; animation-delay: 0s; }
+.tool2 { top: 30%; left: 70%; animation-delay: 1s; }
+.tool3 { top: 60%; left: 25%; animation-delay: 2s; }
+.tool4 { top: 50%; left: 50%; animation-delay: 3s; }
+.tool5 { top: 75%; left: 80%; animation-delay: 4s; }
+
+/* Floating animation */
+@keyframes floatTool {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(10deg); }
+}
+
+/* ================= RIGHT PANEL ================= */
+.login-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+.login-form {
+  background: #2b2b2b;
+  width: 380px;
+  padding: 50px 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.login-form h2 {
+  font-size: 22px;
+  color: #ff8c00;
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.login-form label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  color: #ffa500;
+  margin-bottom: 6px;
+}
+
+.login-form input,
+.login-form select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background: #1f1f1f;
+  color: #fff;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.login-form input::placeholder {
+  color: #999;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #4b0082, #6a1bb1);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(75,0,130,0.6);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .login-left {
+    width: 100%;
+    clip-path: none;
+    padding: 40px 0;
+  }
+  .login-right {
+    width: 100%;
+    padding: 30px 0;
+  }
+}
