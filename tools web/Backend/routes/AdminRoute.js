@@ -1,15 +1,19 @@
 const express = require("express");
-const route = express.Router();
+const router = express.Router();
 const AdminController = require("../controllers/AdminController");
-const adminAuth = require("../middlewares/adminOnly");
+const verifyAdmin = require("../middlewares/AdminMiddle");
 
-route.post("/login", AdminController.adminLogin);
-route.post("/add-product", adminAuth, AdminController.addProduct);
-route.get("/dashboard-stats", adminAuth, AdminController.getDashboardStats);
-route.get("/orders", adminAuth, AdminController.getAllOrders);
-route.get("/products", adminAuth, AdminController.getProductsWithStock);
+// Auth
+router.post("/login", AdminController.adminLogin);
 
+// Dashboard
+router.get("/dashboard", verifyAdmin, AdminController.getDashboardStats);
 
+// Products
+router.post("/products", verifyAdmin, AdminController.addProduct);
+router.get("/products", verifyAdmin, AdminController.getProductsWithStock);
 
+// Orders
+router.get("/orders", verifyAdmin, AdminController.getAllOrders);
 
-module.exports= route;
+module.exports = router;

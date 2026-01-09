@@ -11,29 +11,54 @@ const Login = () => {
   const [usertype, setUserType] = useState("");
   const navigate = useNavigate();
 
+  // ✅ Backend URL (SINGLE SOURCE OF TRUTH)
+  const API_URL = import.meta.env.VITE_BACKEND_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!usertype) {
+      toast.error("Please select user type!");
+      return;
+    }
+
     try {
+      // ================= ADMIN LOGIN =================
       if (usertype === "admin") {
-        const api = `${import.meta.env.VITE_BACKEND_URL}/admin/login`;
-        const res = await axios.post(api, { adminEmail: email, adminPassword: password });
+        const res = await axios.post(
+          `${API_URL}/admin/login`,
+          {
+            adminEmail: email,
+            adminPassword: password,
+          }
+        );
+
         localStorage.setItem("adminname", res.data.admin.name);
         localStorage.setItem("adminemail", res.data.admin.email);
         localStorage.setItem("adminid", res.data.admin.id);
-        toast.success(res.data.msg);
+
+        toast.success(res.data.msg || "Admin login successful");
         setTimeout(() => navigate("/admin-dashboard"), 1500);
-      } else if (usertype === "user") {
-        const api = `${import.meta.env.VITE_BACKENDURL}/user/login`;
-        const res = await axios.post(api, { email, password });
-        toast.success(res.data.msg);
+      }
+
+      // ================= USER LOGIN =================
+      if (usertype === "user") {
+        const res = await axios.post(
+          `${API_URL}/user/login`,
+          {
+            email,
+            password,
+          }
+        );
+
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        toast.success(res.data.msg || "Login successful");
         setTimeout(() => navigate("/home"), 1500);
-      } else {
-        toast.error("Select a user type!");
       }
     } catch (err) {
+      console.error(err);
       toast.error(err.response?.data?.msg || "Login failed");
     }
   };
@@ -43,9 +68,11 @@ const Login = () => {
       {/* LEFT PANEL */}
       <div className="login-left">
         <h1>Power Up Your Hardware World</h1>
-        <p>Discover top-notch tools, gadgets, and accessories. Log in to explore or manage your products.</p>
+        <p>
+          Discover top-notch tools, gadgets, and accessories.
+          Log in to explore or manage your products.
+        </p>
 
-        {/* Floating Hardware Icons */}
         <i className="tool-icon tool1">🔧</i>
         <i className="tool-icon tool2">🪛</i>
         <i className="tool-icon tool3">⚙️</i>
@@ -59,13 +86,29 @@ const Login = () => {
           <h2>Login to Continue</h2>
 
           <label>Email Address</label>
-          <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
           <label>Password</label>
-          <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
           <label>Select User Type</label>
-          <select value={usertype} onChange={(e) => setUserType(e.target.value)} required>
+          <select
+            value={usertype}
+            onChange={(e) => setUserType(e.target.value)}
+            required
+          >
             <option value="">Select user type</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
