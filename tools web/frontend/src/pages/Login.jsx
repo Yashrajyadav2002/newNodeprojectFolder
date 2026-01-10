@@ -11,7 +11,6 @@ const Login = () => {
   const [usertype, setUserType] = useState("");
   const navigate = useNavigate();
 
-  // ✅ Backend URL (SINGLE SOURCE OF TRUTH)
   const API_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleSubmit = async (e) => {
@@ -25,17 +24,15 @@ const Login = () => {
     try {
       // ================= ADMIN LOGIN =================
       if (usertype === "admin") {
-        const res = await axios.post(
-          `${API_URL}/admin/login`,
-          {
-            adminEmail: email,
-            adminPassword: password,
-          }
-        );
+        const res = await axios.post(`${API_URL}/admin/login`, {
+          adminEmail: email,
+          adminPassword: password,
+        });
 
-        localStorage.setItem("adminname", res.data.admin.name);
+        // FIXED: only store fields that backend actually sends
         localStorage.setItem("adminemail", res.data.admin.email);
         localStorage.setItem("adminid", res.data.admin.id);
+        localStorage.setItem("admintoken", res.data.token);
 
         toast.success(res.data.msg || "Admin login successful");
         setTimeout(() => navigate("/admin-dashboard"), 1500);
@@ -43,13 +40,10 @@ const Login = () => {
 
       // ================= USER LOGIN =================
       if (usertype === "user") {
-        const res = await axios.post(
-          `${API_URL}/user/login`,
-          {
-            email,
-            password,
-          }
-        );
+        const res = await axios.post(`${API_URL}/user/login`, {
+          email,
+          password,
+        });
 
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
@@ -65,14 +59,12 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      {/* LEFT PANEL */}
       <div className="login-left">
         <h1>Power Up Your Hardware World</h1>
         <p>
-          Discover top-notch tools, gadgets, and accessories.
-          Log in to explore or manage your products.
+          Discover top-notch tools, gadgets, and accessories. Log in to explore or
+          manage your products.
         </p>
-
         <i className="tool-icon tool1">🔧</i>
         <i className="tool-icon tool2">🪛</i>
         <i className="tool-icon tool3">⚙️</i>
@@ -80,7 +72,6 @@ const Login = () => {
         <i className="tool-icon tool5">🔩</i>
       </div>
 
-      {/* RIGHT PANEL */}
       <div className="login-right">
         <form className="login-form" onSubmit={handleSubmit}>
           <h2>Login to Continue</h2>

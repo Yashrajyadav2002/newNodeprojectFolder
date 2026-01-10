@@ -27,10 +27,20 @@ const upload = multer({
 const adminLogin = async (req, res) => {
   try {
     const { adminEmail, adminPassword } = req.body;
+
+    if (!adminEmail || !adminPassword) {
+      return res.status(400).json({ msg: "Email and Password required" });
+    }
+
     const admin = await AdminModel.findOne({ adminEmail });
     if (!admin) return res.status(401).json({ msg: "Invalid Admin Email" });
+
     if (admin.adminPassword !== adminPassword)
       return res.status(401).json({ msg: "Invalid Password" });
+
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ msg: "JWT secret not configured" });
+    }
 
     const token = jwt.sign(
       { userId: admin._id, role: "admin" },
@@ -41,13 +51,19 @@ const adminLogin = async (req, res) => {
     res.status(200).json({
       msg: "Admin login successful",
       token,
-      admin: { id: admin._id, email: admin.adminEmail, role: "admin" },
+      admin: {
+        id: admin._id,
+        name: admin.adminName,   // added
+        email: admin.adminEmail,
+        role: "admin",
+      },
     });
   } catch (error) {
     console.error("Admin login error:", error);
     res.status(500).json({ msg: "Server error" });
   }
 };
+
 
 // ================= ADD PRODUCT =================
 const addProduct = async (req, res) => {
