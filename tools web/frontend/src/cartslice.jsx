@@ -1,87 +1,76 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+// Helpers
+const getLocalData = (key) => JSON.parse(localStorage.getItem(key)) || [];
+const saveLocalData = (key, data) =>
+  localStorage.setItem(key, JSON.stringify(data));
+
+const initialState = {
+  cart: getLocalData("cart"),
+  wishlist: getLocalData("wishlist"),
+};
 
 const cartSlice = createSlice({
-  name: "mycart",
-  initialState: {
-    cart: savedCart,
-    wishlist: savedWishlist,
-  },
+  name: "hardwareCart",
+  initialState,
   reducers: {
     addToCart: (state, action) => {
-      const item = action.payload;
+      const product = action.payload;
+      const found = state.cart.find((item) => item.id === product.id);
 
-      const existingItem = state.cart.find(
-        (cartItem) => cartItem.id === item.id
-      );
-
-      if (existingItem) {
-        existingItem.qnty += 1;
+      if (found) {
+        found.qnty += 1;
       } else {
         state.cart.push({
-          id: item.id,
-          name: item.name,
-          category: item.category?.toLowerCase(),
-          price: item.price,
-          image: item.image,
-          description: item.description,
+          id: product.id,
+          name: product.name,
+          category: product.category?.toLowerCase(),
+          price: product.price,
+          image: product.image,
+          description: product.description,
           qnty: 1,
         });
       }
-
-      localStorage.setItem("cart", JSON.stringify(state.cart));
+      saveLocalData("cart", state.cart);
     },
 
     increaseQuantity: (state, action) => {
-      const item = state.cart.find(
-        (cartItem) => cartItem.id === action.payload.id
-      );
+      const item = state.cart.find((i) => i.id === action.payload.id);
       if (item) item.qnty += 1;
-
-      localStorage.setItem("cart", JSON.stringify(state.cart));
+      saveLocalData("cart", state.cart);
     },
 
     decreaseQuantity: (state, action) => {
-      const item = state.cart.find(
-        (cartItem) => cartItem.id === action.payload.id
-      );
+      const item = state.cart.find((i) => i.id === action.payload.id);
       if (item && item.qnty > 1) item.qnty -= 1;
-
-      localStorage.setItem("cart", JSON.stringify(state.cart));
+      saveLocalData("cart", state.cart);
     },
 
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter(
         (item) => item.id !== action.payload.id
       );
-
-      localStorage.setItem("cart", JSON.stringify(state.cart));
+      saveLocalData("cart", state.cart);
     },
 
     addToWishlist: (state, action) => {
       const exists = state.wishlist.find(
         (item) => item.id === action.payload.id
       );
-      if (!exists) {
-        state.wishlist.push(action.payload);
-        localStorage.setItem(
-          "wishlist",
-          JSON.stringify(state.wishlist)
-        );
-      }
+      if (!exists) state.wishlist.push(action.payload);
+      saveLocalData("wishlist", state.wishlist);
     },
 
     removeFromWishlist: (state, action) => {
       state.wishlist = state.wishlist.filter(
         (item) => item.id !== action.payload.id
       );
+      saveLocalData("wishlist", state.wishlist);
+    },
 
-      localStorage.setItem(
-        "wishlist",
-        JSON.stringify(state.wishlist)
-      );
+    clearCart: (state) => {
+      state.cart = [];
+      saveLocalData("cart", []);
     },
   },
 });
@@ -93,6 +82,7 @@ export const {
   removeFromCart,
   addToWishlist,
   removeFromWishlist,
+  clearCart,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
