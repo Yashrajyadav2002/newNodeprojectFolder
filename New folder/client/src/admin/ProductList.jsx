@@ -68,7 +68,7 @@ const ProductList = () => {
           <div
             key={product._id}
             style={{
-              backgroundColor: "#020617",
+              backgroundColor: "#090c1a",
               color: "#f1f5f9",
               padding: "15px",
               borderRadius: "12px",
@@ -90,13 +90,13 @@ const ProductList = () => {
             <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
               <button
                 style={{
-                  backgroundColor: "#facc15",
+                  backgroundColor: "#554b21",
                   border: "none",
                   padding: "6px 12px",
                   borderRadius: "6px",
                   fontWeight: "600",
                   cursor: "pointer",
-                  color: "#020617",
+                  color: "#102480",
                 }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#f59e0b")}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#facc15")}
