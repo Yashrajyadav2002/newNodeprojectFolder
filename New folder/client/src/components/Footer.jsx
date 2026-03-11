@@ -10,6 +10,9 @@ const Footer = () => {
           <p>
             ToolHub is your trusted destination for professional power tools,
             hand tools, construction equipment, and safety gear.
+
+
+            
           </p>
         </div>
 
